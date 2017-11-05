@@ -1,0 +1,50 @@
+{% extends ':default/admin:base.html.twig' %}
+
+{% block stylesheets %}
+    <link href="{{ asset('node_modules/datatables/media/css/jquery.dataTables.min.css') }}"
+          rel="stylesheet"
+          type="text/css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('node_modules/datatables/media/js/jquery.dataTables.min.js') }}"></script>
+    <script>
+        $(document).ready(function(){
+            $('#objects-list').dataTable();
+        });
+    </script>
+{% endblock %}
+
+{% block content_header %}
+    <h1>
+        {% set headerString = 'admin.entity.title.trans_'~app.request.get('entity') %}
+        {{ headerString | trans() }}
+
+        <small>List of objects</small>
+    </h1>
+{% endblock %}
+
+{% block content %}
+    {% set tplName = app.request.get('entity')~'.html.twig' %}
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <a href="{{ path('admin.manage', {'entity': app.request.get('entity')}) }}"
+                       role="button"
+                       class="btn btn-success">
+                        {{ 'admin.buttons.add_new_object' | trans() }}
+                    </a>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    {% include 'default/admin/lists/'~tplName with {'objects': objects}%}
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+
+{% endblock %}

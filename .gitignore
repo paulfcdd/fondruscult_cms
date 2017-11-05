@@ -1,0 +1,8 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/
+var/
+vendor/
+web/node_modules/
+app/config/parameters.yml
+app/bootstrap.php.cache
+.web-server-pid

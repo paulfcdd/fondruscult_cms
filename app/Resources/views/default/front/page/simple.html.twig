@@ -1,0 +1,7 @@
+{% extends 'default/front/base.html.twig' %}
+
+{% block meta_description %}{{ page.seoDescription }}{% endblock %}
+{% block meta_keywords %}{{ page.seoKeywords }}{% endblock %}
+{% block meta_autor %}{% endblock %}
+{% block title %}{{ page.title }}{% endblock %}
+{% block content %}{{ page.content | raw }}{% endblock %}

@@ -1,0 +1,21 @@
+admin:
+    buttons:
+        add_new_object: 'Add new object'
+    entity:
+        title:
+            trans_page: 'Pages'
+    list:
+        page:
+            id: 'ID'
+            author: 'Author'
+            date_created: 'Date created'
+            title: 'Title'
+            manage: 'Manage'
+            slug: 'Slug'
+    form:
+        page:
+            title: 'Page title'
+            slug: 'Page slug'
+            content: 'Page content'
+            main_page: 'Set as main page'
+            in_navbar: 'Show in navbar'

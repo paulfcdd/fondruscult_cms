@@ -1,0 +1,14 @@
+<div class="additional-box">
+
+<div class="form-group">
+  <label for="page_post_category">Select category:</label>
+  <select class="form-control" id="page_post_category" name="page[postCategory]">
+  {% for category in categories %}
+      <option value="{{category.id}}">{{category.name}}</option>  
+  {% endfor %}
+  </select>
+  
+  <label for="page_post_per_page">Posts per page:</label>
+  <input type="text" class="form-control" id="page_post_per_page" name="page[postPerPage]" value="10"> 
+</div>
+</div>

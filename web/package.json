@@ -1,0 +1,32 @@
+{
+  "name": "quavacms",
+  "version": "1.0.0",
+  "description": "free symfony based cms",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
+    "fullcalendar": "^3.4.0",
+    "jquery": "^3.2.1",
+    "sweetalert": "^1.1.3",
+    "ionicons": "^3.0.0",
+    "jvectormap": "^2.0.4",
+    "fastclick": "^1.0.6",
+    "jquery-slimscroll": "^1.3.8",
+    "datatables": "^1.10.13",
+    "ckeditor": "^4.7.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulfcdd/scms.git"
+  },
+  "author": "@paulfcdd",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/paulfcdd/scms/issues"
+  },
+  "homepage": "https://github.com/paulfcdd/scms#readme"
+}

@@ -1,0 +1,33 @@
+<table id="objects-list" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>{{ 'admin.list.page.id' | trans() }}</th>
+        <th>{{ 'admin.list.page.title' | trans() }}</th>
+        <th>{{ 'admin.list.page.slug' | trans() }}</th>
+        <th>{{ 'admin.list.page.date_created' | trans() }}</th>
+        <th>Category</th>
+        <th class="text-center">{{ 'admin.list.page.manage' | trans() }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for object in objects %}
+        <tr>
+            <td>{{ object.id }}</td>
+            <td>{{ object.title }}</td>
+            <td>{{ object.slug }}</td>
+            <td>{{ object.dateCreated | date('d-m-Y')}}</td>
+            <td>{{ object.category.name }}</td>
+            <td class="text-center">
+				<div class="btn-group">
+				  <a href="{{ path('admin.manage', {
+									'entity': app.request.get('entity'),
+									'id': object.id
+									}) }}" 
+					 type="button" class="btn btn-primary">Edit</a>
+				  <button type="button" class="btn btn-danger">Delete</button>
+				</div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
