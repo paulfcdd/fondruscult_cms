@@ -11,7 +11,7 @@
     </thead>
     <tbody>
     {% for object in objects %}
-        <tr>
+        <tr id="object-{{ object.id }}">
             <td>{{ object.id }}</td>
             <td>{{ object.title }}</td>
             <td>{{ object.slug }}</td>
@@ -23,8 +23,15 @@
 									'entity': app.request.get('entity'),
 									'id': object.id
 									}) }}" 
-					 type="button" class="btn btn-primary">Edit</a>
-				  <button type="button" class="btn btn-danger">Delete</button>
+					 type="button" class="btn btn-primary">
+                      {{ 'admin.buttons.edit' | trans }}
+                  </a>
+				  <button type="button" class="btn btn-danger delete-object"
+                          data-entity="{{ app.request.get('entity') }}"
+                          data-title="{{ object.title }}"
+                          data-id="{{ object.id }}">
+                      {{ 'admin.buttons.delete' | trans }}
+                  </button>
 				</div>
             </td>
         </tr>

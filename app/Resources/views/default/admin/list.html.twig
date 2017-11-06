@@ -34,8 +34,12 @@
                     <a href="{{ path('admin.manage', {'entity': app.request.get('entity')}) }}"
                        role="button"
                        class="btn btn-success">
-                        {{ 'admin.buttons.add_new_object' | trans() }}
+                        {{ 'admin.buttons.add' | trans() }}
                     </a>
+
+                    <button role="button" class="btn btn-warning">
+                        {{ 'admin.buttons.trash' | trans() }}
+                    </button>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">

@@ -4,6 +4,7 @@ namespace AppBundle\Controller\Admin;
 
 use AppBundle\Entity\File;
 use AppBundle\Entity\Category;
+use AppBundle\Entity\Trash;
 use AppBundle\Service\MailerService;
 use Doctrine\DBAL\DBALException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -66,11 +67,11 @@ class ApiController extends AdminController
      */
     public function deleteObjectAjaxAction(Request $request) {
 
-    	$objectName = $request->request->get('objectName');
+    	$entity = $request->request->get('entity');
 
-    	$id = $request->request->get('objectId');
+    	$id = $request->request->get('id');
 
-        $objectFQN = self::ENTITY_NAMESPACE_PATTERN.ucfirst($objectName);
+        $objectFQN = self::ENTITY_NAMESPACE_PATTERN.ucfirst($entity);
 
         $objectEntity = $this->doctrineManager()->getRepository($objectFQN)->findOneById($id);
 
@@ -87,6 +88,7 @@ class ApiController extends AdminController
 			->setRemoved(true);
 
 		$this->doctrineManager()->flush();
+
 		return JsonResponse::create();
 	}
 
@@ -97,11 +99,11 @@ class ApiController extends AdminController
 	 */
     public function repairObjectAction(Request $request) {
 
-		$objectName = $request->request->get('objectName');
+		$entity = $request->request->get('entity');
 
-		$id = $request->request->get('objectId');
+		$id = $request->request->get('id');
 
-		$objectFQN = self::ENTITY_NAMESPACE_PATTERN.ucfirst($objectName);
+		$objectFQN = self::ENTITY_NAMESPACE_PATTERN.ucfirst($entity);
 
 		$objectEntity = $this->doctrineManager()->getRepository($objectFQN)->findOneById($id);
 

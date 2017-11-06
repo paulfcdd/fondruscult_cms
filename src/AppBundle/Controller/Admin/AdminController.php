@@ -40,7 +40,13 @@ class AdminController extends Controller
     public function listAction(string $entity)
     {
 
-        $objects = $this->getEntityRepository($entity)->findBy(['removed' => false]);
+        $objects = null;
+
+        if ($entity == 'trash') {
+            $objects = $this->getEntityRepository($entity)->findAll();
+        } else {
+            $objects = $this->getEntityRepository($entity)->findBy(['removed' => false]);
+        }
 
         return $this->render(':default/admin:list.html.twig', [
             'objects' => $objects,

@@ -1,9 +1,31 @@
 admin:
+    sidebar:
+        pages:
+            title: 'Pages'
+            list: 'All pages'
+            add: 'Add page'
+        posts:
+            title: 'Posts'
+            list: 'All posts'
+            add: 'Add post'
+            category: 'Categories'
+        trash:
+            title: 'Trash'
+
     buttons:
-        add_new_object: 'Add new object'
+        add: 'Add new object'
+        edit: 'Edit'
+        delete: 'Delete'
+        repair: 'Repair'
+        trash: 'Trash'
+
+
     entity:
         title:
             trans_page: 'Pages'
+            trans_trash: 'Trash'
+            trans_post: 'Posts'
+            trans_category: 'Categories'
     list:
         page:
             id: 'ID'
@@ -13,6 +35,7 @@ admin:
             manage: 'Manage'
             slug: 'Slug'
             order: 'Sort order'
+            category: 'Category'
     form:
         page:
             title: 'Page title'

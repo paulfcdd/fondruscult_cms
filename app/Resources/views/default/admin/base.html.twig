@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('admin_files/dist/css/AdminLTE.min.css') }}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{ asset('admin_files/dist/css/skins/_all-skins.min.css')}}">
+    <link href="{{ asset('node_modules/sweetalert/dist/sweetalert.css') }}" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -71,6 +72,68 @@
 <script src="{{ asset('node_modules/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
 <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
 <script src="{{ asset('js/plugins/translit/translit.js') }}"></script>
+<script>
+
+
+    $('.delete-object').on('click', function () {
+
+        var entity = $(this).data('entity'),
+            id = $(this).data('id'),
+            title = $(this).data('title'),
+            url = '{{ path('admin.api.object_delete') }}',
+            rowId = 'object-'+id;
+
+        swal({
+            title: "Удалить объект "+title+"?",
+            text: "Объект будет перемещен в корзину.",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Удалить",
+            closeOnConfirm: false
+        }, function () {
+            $.ajax({
+                url: url,
+                method: 'post',
+                data: {
+                    'entity': entity,
+                    'id': id
+                },
+                success: function (data) {
+                    console.log(data);
+                    swal({
+                        title: 'Удалено',
+                        text: 'Объект был успешно удален',
+                        type: 'success'
+                    }, function () {
+                        $('#'+rowId).remove();
+                    });
+                }
+            });
+        });
+
+    });
+
+    $('.repair-object').on('click', function (e) {
+        var entity = $(this).data('entity'),
+            id = $(this).data('id'),
+            url = '{{ path('admin.api.object_repair') }}';
+
+        $.ajax({
+            url: url,
+            method: 'post',
+            data: {
+                'entity': entity,
+                'id': id
+            },
+            success: function (data) {
+               alert(data);
+            }
+        });
+        })
+
+</script>
+
 {% block javascripts %}{% endblock %}
 </body>
 </html>

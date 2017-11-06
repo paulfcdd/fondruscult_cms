@@ -2,19 +2,19 @@
 
     {% set mainMenu = [
     {
-        label: 'Pages',
+        label: 'admin.sidebar.pages.title' | trans,
         icon: 'fa-file-o',
         path: null,
 		tree: [
 			{
-				label: 'All pagess',
+				label: 'admin.sidebar.pages.list' | trans,
 				icon: null,
 				path: path('admin.list', {'entity': 'page'}),
 				tree: null,
 				data_entity: 'page'
 			},
 			{
-				label: 'Add page',
+				label: 'admin.sidebar.pages.add' | trans,
 				icon: null,
 				path: path('admin.manage', {'entity': 'page'}),
 				tree: null,
@@ -24,26 +24,26 @@
         data_entity: 'page'
     },
     {
-		label: 'Posts',
+		label: 'admin.sidebar.posts.title' | trans,
         icon: 'fa-thumb-tack',
         path: null,
         tree: [
 			{
-				label: 'All posts',
+				label: 'admin.sidebar.posts.list' | trans,
 				icon: null,
 				path: path('admin.list', {'entity': 'post'}),
 				tree: null,
 				data_entity: 'post'
 			},
 			{
-				label: 'Add post',
+				label: 'admin.sidebar.posts.add' | trans,
 				icon: null,
 				path: path('admin.manage', {'entity': 'post'}),
 				tree: null,
 				data_entity: 'post'
 			},
 			{
-				label: 'Categories',
+				label: 'admin.sidebar.posts.category' | trans,
 				icon: null,
 				path: path('admin.list', {'entity': 'category'}),
 				tree: null,
