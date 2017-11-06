@@ -1,0 +1,40 @@
+.card {
+
+	width: 100%;
+	background-color: #cfba91;
+	
+	.card-block {
+		padding-bottom: 0;
+		
+		.footer-navbar {
+			ul {
+				li {
+				
+					&:after {
+						content: '|';
+					}
+					
+					&:last-child {
+						&:after {
+							content: '';
+						}
+					}
+					
+					
+					
+					a {
+						color: #BE1C1A;
+					}
+				}
+			}
+		}
+		
+		.footer-label {
+			color: #BE1C1A;
+			text-transform: uppercase;
+			font-size: 15px;
+			white-space: nowrap;
+		}
+	}
+
+}

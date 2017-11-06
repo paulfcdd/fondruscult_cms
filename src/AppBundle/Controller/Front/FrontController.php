@@ -46,7 +46,7 @@ class FrontController extends Controller
 				
 		$page = $this->em()->getRepository(Page::class)->findOneBy(['removed' => false, 'slug' => $slug]);
 				
-		dump($page);
+		dump($page->getType());
 		
 							
 		if ($page->getType() == 'page_with_post') {
