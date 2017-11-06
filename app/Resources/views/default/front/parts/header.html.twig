@@ -1,55 +1,68 @@
 <div class="row">
-<nav class="navbar navbar-light bg-faded navbar-toggleable-md navbar-toggleable-lg main-navbar">
-				  <button class="navbar-toggler navbar-toggler-right" 
-				  type="button" data-toggle="collapse" 
-				  data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" 
-				  aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				  </button>
-				 
+    <nav class="navbar navbar-light bg-faded navbar-toggleable-md navbar-toggleable-lg main-navbar">
 
-				  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<div class="container">
-						<div class="row">
-							<div class="col-lg-5 text-center left-navabar">
-								<ul class="navbar-nav mr-auto text-center navbar-text">
-									
-									  {% for page in pages %}    
-										{% set path = null %}
-										{% if page.slug == '/' %}
-											{% set path = path('front.mainController') %}
-											{% else %}
-											{% set path = path('front.mainController', {'slug': page.slug}) %}
-										{% endif %}
-											
-										<li class="nav-item">
-											<a class="nav-link" href="{{ path }}">{{ page.title }}</a>
-										</li>
-									{% endfor %}
-								
-								</ul>
-							</div>
-							<div class="col-lg-2">
-								<a href="index.html">
-									<img src="{{ asset('front/img/images.jpeg') }}" style="  position: absolute;
+        <button class="navbar-toggler navbar-toggler-right"
+                type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 text-center left-navabar">
+                        <ul class="navbar-nav mr-auto text-center navbar-text">
+                            {% for i in 0..3 %}
+                                {% for page in pages %}
+                                   {% if page.sortOrder == i %}
+                                       {% set path = null %}
+                                       {% if page.slug == '/' %}
+                                           {% set path = path('front.mainController') %}
+                                       {% else %}
+                                           {% set path = path('front.mainController', {'slug': page.slug}) %}
+                                       {% endif %}
+
+                                       <li class="nav-item">
+                                           <a class="nav-link" href="{{ path }}">{{ page.title }}</a>
+                                       </li>
+                                   {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="col-lg-2">
+                        <a href="{{ path('front.mainController') }}">
+                            <img src="{{ asset('front/img/images.jpeg') }}" style="  position: absolute;
 																	left: -8%;
 																	top: -88px;
 																	z-index: 5;">
-								</a>
-							</div>
-							
-							<div class="col-lg-5 right-navbar text-center">
-								<ul class="navbar-nav mr-auto navbar-text" style="margin-right: 0px !important;">
-								  <li class="nav-item">
-									<a class="nav-link" href="docs.html">Документы</a>
-								  </li>
-								  <li class="nav-item">
-									<a class="nav-link" href="contacts.html">Контакты</a>
-								  </li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				  </div>
-				</nav>				
-			</div>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-5 right-navbar text-center">
+                        <ul class="navbar-nav mr-auto navbar-text" style="margin-right: 0px !important;">
+                            {% for i in 4..7 %}
+                                {% for page in pages %}
+                                    {% if page.sortOrder == i %}
+                                        {% set path = null %}
+                                        {% if page.slug == '/' %}
+                                            {% set path = path('front.mainController') %}
+                                        {% else %}
+                                            {% set path = path('front.mainController', {'slug': page.slug}) %}
+                                        {% endif %}
+
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ path }}">{{ page.title }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>

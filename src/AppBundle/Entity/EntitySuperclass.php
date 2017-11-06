@@ -26,7 +26,7 @@ class EntitySuperclass
 
     /**
      * @var string
-     * @ORM\Column(type="text", length=20000)
+     * @ORM\Column(type="text", length=20000, nullable=true)
      */
     private $content;
 

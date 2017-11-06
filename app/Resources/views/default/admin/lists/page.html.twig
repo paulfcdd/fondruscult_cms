@@ -5,6 +5,7 @@
         <th>{{ 'admin.list.page.title' | trans() }}</th>
         <th>{{ 'admin.list.page.slug' | trans() }}</th>
         <th>{{ 'admin.list.page.date_created' | trans() }}</th>
+        <th>{{ 'admin.list.page.order' | trans() }}</th>
         <th class="text-center">{{ 'admin.list.page.manage' | trans() }}</th>
     </tr>
     </thead>
@@ -15,6 +16,7 @@
             <td>{{ object.title }}</td>
             <td>{{ object.slug }}</td>
             <td>{{ object.dateCreated | date('d-m-Y')}}</td>
+            <td>{{ object.sortOrder }}</td>
             <td class="text-center">
 				<div class="btn-group">
 				  <a href="{{ path('admin.manage', {

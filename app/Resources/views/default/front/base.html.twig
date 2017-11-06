@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>{%block title %}{% endblock %}</title>
 	<meta name="description" content="{% block seoDescription %}{% endblock %}">
@@ -10,24 +10,22 @@
 	<link href="{{ asset('front/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('front/css/style.css') }}" rel="stylesheet" type="text/css">
 	<meta charset="utf-8" />
+
+    {% block stylesheet %}{% endblock %}
 </head>
 
 <body>
 
 	<div class="wrapper">
 		<div class="container">
-			
 			    {{ render(controller('AppBundle:Front\\Front:navbar')) }}
-
-			
 		</div>
 		<div class="content">
 			<div class="container">
 				<div class="row content-row-block" id="{% block page_id%}{% endblock %}">
-					<ol class="breadcrumb">
-					  <li class="breadcrumb-item"><a href="{{ path('front.mainController') }}">Главная</a></li>
-					  <li class="breadcrumb-item active">{% block breadcrumb_page_name %}{% endblock %}</li>
-					</ol>
+
+					{% block breadcrumbs %}{% endblock %}
+
 					<h1 style="width: 100%">{% block page_title %}{% endblock %}</h1>
 					{% block content %}{% endblock %}
 				</div>
@@ -70,6 +68,8 @@
 		</div>
 
 	</div><!-- .wrapper -->
-
+<script src="{{ asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
+{% block javascript %}{% endblock %}
 </body>
 </html>

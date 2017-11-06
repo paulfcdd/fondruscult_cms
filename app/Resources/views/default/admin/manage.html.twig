@@ -1,81 +1,93 @@
 {% extends ':default/admin:base.html.twig' %}
 
+{% set entity = app.request.get('entity') %}
+
 {% block stylesheets %}
 {% endblock %}
 
 {% block javascripts %}
-<script src="{{ asset('node_modules/ckeditor/ckeditor.js') }}"></script>
-<script>
-  $(document).ready(function() {
-   
-    {% if app.request.get('entity') == 'page' %}
-		$('#page_type').change(function() {
-			let pageType = $(this).val(),
-				parentElement = $(this).parent();
-			
-			if (pageType == 'page_with_post') {
-				$.ajax({
-					url: '{{ path('admin.api.page_post_type_extra_fields') }}',
-					method: 'post',
-					success: function(data) {
-						$(parentElement)
-						.parent()
-						.append(data);
-					}
-				})
-			}
-		});
-    {% endif %}
-     
-     $('.set-as-default').on('click', function () {
-            var fileId = $(this).data('fileid'),
-                url = '{{ path('admin.api.set_as_default', {'file': '_fileId' }) }}',
-                btn = $(this);
+    <script src="{{ asset('node_modules/ckeditor/ckeditor.js') }}"></script>
+    <script>
+        $(document).ready(function () {
 
-            $.ajax({
-                url: url.replace('_fileId', fileId),
-                method:'post',
-                success: function (data) {
+            {% if app.request.get('entity') == 'page' %}
+            $('#page_type').change(function () {
+                let pageType = $(this).val(),
+                    parentElement = $(this).parent();
 
-                    var disableBtn = $.find('.set-as-default[disabled]');
-
-                    $(disableBtn)
-                        .attr('disabled', false);
-
-                    btn
-                        .attr('disabled', true);
-                },
-                error: function (resp) {
-                    alert(resp)
-                }
-            })
-        });
-
-        $('.delete-file').on('click', function () {
-            var fieldId = $(this).data('fileid'),
-                url = '{{ path('admin.api.file_delete', {'file': '_file'}) }}';
-
-            $.ajax({
-                url: url.replace('_file', fieldId),
-                method: 'post',
-                success: function (data) {
-                    $('#file_'+fieldId).remove();
+                if (pageType == 'page_with_post') {
+                    $.ajax({
+                        url: '{{ path('admin.api.page_post_type_extra_fields') }}',
+                        method: 'post',
+                        success: function (data) {
+                            $(parentElement)
+                                .parent()
+                                .append(data);
+                        }
+                    })
                 }
             });
+            {% endif %}
+
+            $('.set-as-default').on('click', function () {
+                var fileId = $(this).data('fileid'),
+                    url = '{{ path('admin.api.set_as_default', {'file': '_fileId' }) }}',
+                    btn = $(this);
+
+                $.ajax({
+                    url: url.replace('_fileId', fileId),
+                    method: 'post',
+                    success: function (data) {
+
+                        var disableBtn = $.find('.set-as-default[disabled]');
+
+                        $(disableBtn)
+                            .attr('disabled', false);
+
+                        btn
+                            .attr('disabled', true);
+                    },
+                    error: function (resp) {
+                        alert(resp)
+                    }
+                })
+            });
+
+            $('.delete-file').on('click', function () {
+                var fieldId = $(this).data('fileid'),
+                    url = '{{ path('admin.api.file_delete', {'file': '_file'}) }}';
+
+                $.ajax({
+                    url: url.replace('_file', fieldId),
+                    method: 'post',
+                    success: function (data) {
+                        $('#file_' + fieldId).remove();
+                    }
+                });
+            });
+
+            $('.single-file-wrapper').on('click', function (e) {
+                e.preventDefault();
+            });
+
+            $('.url-translit-generator').on('click', function (e) {
+
+                $('#{{ entity }}_title').liTranslit({
+                    elAlias: $('#{{ entity }}_slug')
+                });
+
+                $('#{{ entity }}_title').unbind();
+            });
+
+            CKEDITOR.replace('.ckeditor');
+
         });
-
-        $('.single-file-wrapper').on('click', function (e) {
-            e.preventDefault();
-        })
-        
-    CKEDITOR.replace('.ckeditor');
-
-    });
-</script>
+    </script>
 {% endblock %}
 
 {% block content_header %}
     <h1>
+
         {{ 'admin.entity.title.trans_'~app.request.get('entity') | trans() }}
         <small>List of objects</small>
     </h1>
@@ -85,6 +97,6 @@
 
     {% set tplName = app.request.get('entity')~'.html.twig' %}
 
-    {% include 'default/admin/manage/'~tplName with{'form': form}%}
+    {% include 'default/admin/manage/'~tplName with{'form': form, 'entity':entity} %}
 
 {% endblock %}

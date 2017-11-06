@@ -75,6 +75,12 @@ class Page extends EntitySuperclass
      * @ORM\Column(type="integer", length=5, nullable=true)
      */ 
     private $postPerPage;
+
+    /**
+     * @var integer
+     * @ORM\Column(type="integer", length=5)
+     */
+    private $sortOrder = 0;
     
     /**
      * @return string
@@ -234,4 +240,24 @@ class Page extends EntitySuperclass
 		return $this->postPerPage;
 		
 	}
+
+    /**
+     * @return int
+     */
+    public function getSortOrder()
+    {
+        return $this->sortOrder;
+    }
+
+    /**
+     * @param int $sortOrder
+     * @return Page
+     */
+    public function setSortOrder($sortOrder)
+    {
+        $this->sortOrder = $sortOrder;
+        return $this;
+    }
+
+
 }

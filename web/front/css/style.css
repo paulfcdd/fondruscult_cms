@@ -46,10 +46,8 @@ body {
   width: 100%;
   background: transparent;
   border-bottom: 1px solid #BE1C1A;
-  padding-bottom: 0px;
-  padding-top: 0px;
-  padding-left: 0px;
-  padding-right: 0px;
+  padding: 0;
+  border-radius: 0;
 }
 .wrapper .content .content-row-block .breadcrumb a {
   color: #BE1C1A;
@@ -57,15 +55,19 @@ body {
 .wrapper .content .card {
   border: none;
   margin-bottom: 20px;
+  width: 100%;
 }
 .wrapper .content .card .card-block {
   padding-left: 0;
 }
+.wrapper .content .card .card-block .post-title {
+  color: #be1c1b;
+  text-transform: uppercase;
+  font-size: 1.4em;
+}
 .wrapper .content .card .card-img-bottom {
   color: #fff;
   height: 20rem;
-  background: url(http://placehold.it/100x100) center no-repeat;
-  background-size: cover;
 }
 .wrapper .footer {
   flex: 0 0 auto;

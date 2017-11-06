@@ -12,6 +12,7 @@ admin:
             title: 'Title'
             manage: 'Manage'
             slug: 'Slug'
+            order: 'Sort order'
     form:
         page:
             title: 'Page title'

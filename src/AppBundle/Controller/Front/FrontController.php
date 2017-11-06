@@ -73,22 +73,21 @@ class FrontController extends Controller
     
     /**
      * @param string $page_slug
-     * @param string $post_year
-     * @param string $post_month
-     * @param string $post_day
      * @param string $post_slug
      * @return Http\Response
-     * @Route("/{page_slug}/{post_year}/{post_month}/{post_day}/{post_slug}",
+     * @Route("/{page_slug}/{post_slug}",
      *     name="front.show_post"
      * )
      */
-    public function showPostAction(string $page_slug, string $post_year, string $post_month,string $post_day, string $post_slug) {
+    public function showPostAction(string $page_slug, string $post_slug) {
 		
 		
 		$post = $this->em()->getRepository(Post::class)->findOneBySlug($post_slug);
+		$page = $this->em()->getRepository(Page::class)->findOneBySlug($page_slug);
 		
 		return $this->render(':default/front/page:single_post_page.html.twig', [
-		'post' => $post,
+		    'post' => $post,
+            'page' => $page,
 		]);
 		
 	}
@@ -106,6 +105,22 @@ class FrontController extends Controller
 		'pages' => $pages,
 		]);
 	}
+
+	public function breadcrumbAction(string $uri) {
+        $uri = explode('/', $uri);
+        $preparedUri = [];
+
+        foreach ($uri as $item) {
+            dump($item);
+        }
+
+        die;
+
+        return $this->render(':default/front/parts:breadcrumb.html.twig', [
+            'uri' => $uri
+        ]);
+
+    }
 
 //
 //    /**

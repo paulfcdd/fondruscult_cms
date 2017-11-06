@@ -1,5 +1,7 @@
 {% extends 'default/front/base.html.twig' %}
 
+{% set content_preview_chars_limit = 300 %}
+
 {% block meta_description %}{{ page.seoDescription }}{% endblock %}
 {% block meta_keywords %}{{ page.seoKeywords }}{% endblock %}
 {% block meta_autor %}{% endblock %}
@@ -9,31 +11,55 @@
 
 {% block breadcrumb_page_name %}{{ page.title }}{% endblock %}
 
+ {% block breadcrumbs %}
+     <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="{{ path('front.mainController') }}">Главная</a></li>
+         <li class="breadcrumb-item active">{{ page.title }}</li>
+     </ol>
+ {% endblock %}
+
 {% block content %}
-	{{ page.content | raw }}
-	{% for post in posts %}
-			
-			<div class="card">
-					  <div class="row">
-						<div class="col-md-8">
-						  <div class="card-block">
-							<h4 class="card-title">Curabitur gravida vestibulum imperdiet.</h4>
-							<p class="card-text">Cras convallis ut turpis vitae facilisis. Morbi eu augue vel quam efficitur rhoncus vitae eget lectus. Cras augue ligula, aliquam ut enim ut, feugiat imperdiet sem. Integer sed mi quis nisl eleifend interdum.</p>
-							<p class="card-text">Cras convallis ut turpis vitae facilisis. Morbi eu augue vel quam efficitur rhoncus vitae eget lectus. Cras augue ligula, aliquam ut enim ut, feugiat imperdiet sem.</p>
-							<a href="href="{{ path('front.show_post', {
-					'page_slug': app.request.get('slug'),
-					'post_year': post.dateCreated | date('Y'),
-					'post_month': post.dateCreated | date('m'),
-					'post_day': post.dateCreated | date('d'),
-					'post_slug': post.slug
-					}) }}"" class="float-right">Подробнее</a>
-						  </div>
-						</div>
-						<div class="col-md-4">
-						  <div class="card-img-bottom">
-						  </div>
-						</div>
-					  </div>
-					</div>
-		{% endfor %}
+    {% for post in posts %}
+
+
+        {% set content_preview = post.content | striptags %}
+
+        {% if content_preview | length >= content_preview_chars_limit %}
+            {% set content_preview = content_preview | slice(0,content_preview_chars_limit) %}
+            {% set content_preview = content_preview~'...' %}
+        {% endif %}
+
+        <div class="card">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card-block">
+                        <h4 class="card-title post-title">{{ post.title }}</h4>
+                        <p class="card-text">
+                            {{ content_preview }}
+                        </p>
+                        <a href="{{ path('front.show_post', {
+                            'page_slug': app.request.get('slug'),
+                            'post_slug': post.slug
+                        }) }}" class="float-right">Подробнее</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card-img-bottom">
+
+                        {% set post_img = 'http://placehold.it/250x250' %}
+
+                        {% if post.files is not empty %}
+                            {% for file in post.files %}
+                                {% if file.isDefault == true %}
+                                    {% set path_to_file = 'upload/post/'~file.name %}
+                                    {% set post_img = asset(''~path_to_file~'') %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        <img src="{{ post_img }}" width="250px" height="250px">
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}

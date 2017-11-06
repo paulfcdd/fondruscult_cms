@@ -25,6 +25,11 @@ class PageType extends BaseFormType
 				'label' => 'admin.form.page.in_navbar',
 				'required' => false,
  			])
+            ->add('sortOrder', CoreType\IntegerType::class, [
+                'attr' => [
+                    'min' => 0
+                ]
+            ])
             ->add('slug', CoreType\TextType::class, [
                 'label' => 'admin.form.page.slug',
                 'required' => false,

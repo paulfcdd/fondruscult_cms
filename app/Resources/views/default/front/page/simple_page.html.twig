@@ -10,6 +10,11 @@
 
 {% block page_title %}{{ page.title }}{% endblock %}
 
-{% block breadcrumb_page_name %}{{ page.title }}{% endblock %}
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('front.mainController') }}">Главная</a></li>
+        <li class="breadcrumb-item active">{{ page.title }}</li>
+    </ol>
+{% endblock %}
 
 {% block content %}{{ page.content | raw }}{% endblock %}
