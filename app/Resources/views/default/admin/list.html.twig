@@ -28,7 +28,7 @@
     {% set tplName = app.request.get('entity')~'.html.twig' %}
 
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-8">
             <div class="box">
                 <div class="box-header">
                     <a href="{{ path('admin.manage', {'entity': app.request.get('entity')}) }}"
@@ -36,10 +36,6 @@
                        class="btn btn-success">
                         {{ 'admin.buttons.add' | trans() }}
                     </a>
-
-                    <button role="button" class="btn btn-warning">
-                        {{ 'admin.buttons.trash' | trans() }}
-                    </button>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -48,6 +44,20 @@
                 <!-- /.box-body -->
             </div>
         </div>
+
+        <div class="col-xs-4">
+            <div class="box">
+                <div class="box-header">
+                    <h4><span class="fa fa-trash-o"></span> {{ 'admin.list.trash' | trans }}</h4>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    {% include ':default/admin/lists:trash.html.twig' with {'trashObjects': trashObjects}%}
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+
         <!-- /.col -->
     </div>
 

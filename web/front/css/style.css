@@ -60,7 +60,10 @@ body {
 .wrapper .content .card .card-block {
   padding-left: 0;
 }
-.wrapper .content .card .card-block .post-title {
+.wrapper .content .card .card-block .post-title-link {
+  text-decoration: none;
+}
+.wrapper .content .card .card-block .post-title-link .post-title {
   color: #be1c1b;
   text-transform: uppercase;
   font-size: 1.4em;

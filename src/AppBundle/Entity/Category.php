@@ -31,7 +31,7 @@ class Category {
 	private $name;
 	
 	/** 
-     * @ORM\OneToOne(targetEntity="Category")
+     * @ORM\ManyToOne(targetEntity="Category")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      */ 
 	private $parent;

@@ -85,7 +85,7 @@
 
         swal({
             title: "Удалить объект "+title+"?",
-            text: "Объект будет перемещен в корзину.",
+            text: "Объект будет перемещен в корзину",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
@@ -117,20 +117,39 @@
     $('.repair-object').on('click', function (e) {
         var entity = $(this).data('entity'),
             id = $(this).data('id'),
-            url = '{{ path('admin.api.object_repair') }}';
+            title = $(this).data('title'),
+            rowId = 'object-'+id,
+        url = '{{ path('admin.api.object_repair') }}';
 
-        $.ajax({
-            url: url,
-            method: 'post',
-            data: {
-                'entity': entity,
-                'id': id
-            },
-            success: function (data) {
-               alert(data);
-            }
+        swal({
+            title: "Восстановить объект "+title+"?",
+            text: "Объект будет доступен в списке",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#6EDD62",
+            confirmButtonText: "Восстановить",
+            closeOnConfirm: false
+        }, function () {
+            $.ajax({
+                url: url,
+                method: 'post',
+                data: {
+                    'entity': entity,
+                    'id': id
+                },
+                success: function (data) {
+                    console.log(data);
+                    swal({
+                        title: 'Удалено',
+                        text: 'Объект был успешно удален',
+                        type: 'success'
+                    }, function () {
+                        $('#'+rowId).remove();
+                    });
+                }
+            });
         });
-        })
+    })
 
 </script>
 

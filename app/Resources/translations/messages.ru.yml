@@ -1,4 +1,47 @@
 admin:
-    news: Новости
-    about: О фонде
-    project: Проекты
+    sidebar:
+        pages:
+            title: 'Страницы'
+            list: 'Список страниц'
+            add: 'Добавить страницу'
+        posts:
+            title: 'Записи'
+            list: 'Список записей'
+            add: 'Добавить запись'
+            category: 'Категории'
+        trash:
+            title: 'Корзина'
+
+    buttons:
+        add: 'Новый объект'
+        edit: 'Правка'
+        delete: 'Удалить'
+        repair: 'Восстановить'
+        trash: 'Корзина'
+        generate_url: 'Генерировать URL'
+
+
+    entity:
+        title:
+            trans_page: 'Страницы'
+            trans_post: 'Записи'
+            trans_category: 'Категории'
+    list:
+        trash: 'Корзина'
+        page:
+            id: 'ID'
+            author: 'Автор'
+            date_created: 'Дата создания'
+            date_removed: 'Дата удаления'
+            title: 'Название'
+            manage: 'Управление'
+            slug: 'URL'
+            order: 'Порядок сортировки'
+            category: 'Категория'
+    form:
+        page:
+            title: 'Название страницы'
+            slug: 'URL страницы'
+            content: 'Содержание'
+            main_page: 'Главная страница'
+            in_navbar: 'Показывать в меню'

@@ -9,7 +9,7 @@
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block stylesheet %}
-<link href="{{ asset('front/plugins/blueimp-gallery/css/blueimp-gallery.css') }}" rel="stylesheet">
+    <link href="{{ asset('front/plugins/blueimp-gallery/css/blueimp-gallery.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block javascript %}
@@ -30,40 +30,41 @@
 {% block breadcrumbs %}
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ path('front.mainController') }}">Главная</a></li>
-        <li class="breadcrumb-item"><a href="{{ path('front.mainController', {'slug': page.slug}) }}">{{ page.title }}</a></li>
+        <li class="breadcrumb-item"><a
+                    href="{{ path('front.mainController', {'slug': page.slug}) }}">{{ page.title }}</a></li>
         <li class="breadcrumb-item active">{{ post.title }}</li>
     </ol>
 {% endblock %}
 
 {% block content %}
-{{ post.content | raw }}
+    {{ post.content | raw }}
+    {% if post.files is not empty %}
 
-   <div class="container">
-       <div class="row">
-           <div id="links" class="links col-xs-12">
-               <h4>Фотоматериалы</h4>
+        <div class="container">
+            <h4 data-toggle="collapse" class="collapse-toggle" data-target="#photos">Фотоматериалы</h4>
 
-               {% if post.files is not empty %}
-                   {% for file in post.files %}
-                       {% set path_to_file = 'upload/post/'~file.name %}
-                       {% set post_img = asset(''~path_to_file~'') %}
-                       <a href="{{post_img }}">
-                           <img src="{{ post_img }}" width="250px" height="250px">
-                       </a>
+            <div class="row collapse" id="photos">
+                <div id="links" class="links col-xs-12">
+                    {% for file in post.files %}
+                        {% set path_to_file = 'upload/post/'~file.name %}
+                        {% set post_img = asset(''~path_to_file~'') %}
+                        <a href="{{ post_img }}">
+                            <img src="{{ post_img }}" width="250px" height="250px">
+                        </a>
 
-                   {% endfor %}
-               {% endif %}
+                    {% endfor %}
+                </div>
+                <div id="blueimp-gallery" class="blueimp-gallery">
+                    <div class="slides"></div>
+                    <h3 class="title"></h3>
+                    <a class="prev">‹</a>
+                    <a class="next">›</a>
+                    <a class="close">×</a>
+                    <a class="play-pause"></a>
+                    <ol class="indicator"></ol>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 
-           </div>
-       </div>
-       <div id="blueimp-gallery" class="blueimp-gallery">
-           <div class="slides"></div>
-           <h3 class="title"></h3>
-           <a class="prev">‹</a>
-           <a class="next">›</a>
-           <a class="close">×</a>
-           <a class="play-pause"></a>
-           <ol class="indicator"></ol>
-       </div>
-   </div>
 {% endblock %}

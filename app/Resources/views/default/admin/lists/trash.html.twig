@@ -1,0 +1,33 @@
+<table id="objects-list" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>{{ 'admin.list.page.title' | trans() }}</th>
+        <th>{{ 'admin.list.page.date_removed' | trans() }}</th>
+        <th class="text-center">{{ 'admin.list.page.manage' | trans() }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for object in trashObjects %}
+        <tr id="object-{{ object.id }}">
+            <td>{{ object.title }}</td>
+            <td>{{ object.dateRemoved | date('d-m-Y')}}</td>
+            <td class="text-center">
+                <div class="btn-group">
+                   <button type="button" class="btn btn-success repair-object"
+                           data-entity="{{ app.request.get('entity') }}"
+                           data-title="{{ object.title }}"
+                           data-id="{{ object.id }}">
+                       {{ 'admin.buttons.repair' | trans }}
+                   </button>
+                    <button type="button" class="btn btn-danger delete-object"
+                            data-entity="{{ app.request.get('entity') }}"
+                            data-title="{{ object.title }}"
+                            data-id="{{ object.id }}">
+                        {{ 'admin.buttons.delete' | trans }}
+                    </button>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

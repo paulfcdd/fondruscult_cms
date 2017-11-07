@@ -18,7 +18,7 @@ admin:
         delete: 'Delete'
         repair: 'Repair'
         trash: 'Trash'
-
+        generate_url: 'Generate slug'
 
     entity:
         title:
@@ -27,10 +27,12 @@ admin:
             trans_post: 'Posts'
             trans_category: 'Categories'
     list:
+        trash: 'Trash'
         page:
             id: 'ID'
             author: 'Author'
             date_created: 'Date created'
+            date_removed: 'Date removed'
             title: 'Title'
             manage: 'Manage'
             slug: 'Slug'
