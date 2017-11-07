@@ -19,7 +19,8 @@ class Page extends EntitySuperclass
         
     const PAGE_TYPE = [
 		'Simple page' => 'simple_page',
-		'Page with posts' => 'page_with_post'
+		'Page with posts' => 'page_with_post',
+        'Main page' => 'main_page'
     ];
         
     /**

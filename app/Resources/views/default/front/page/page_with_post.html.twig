@@ -43,8 +43,7 @@
                         </a>
 
                         <small>
-                            Категория:
-                            <a href="{{ path('filter_by_category', {'page_slug': page.slug, 'id': post.category.id}) }}">{{ post.category.name }}</a>
+                            Категория: {{ post.category.name }}
                         </small>
 
                         <p class="card-text pt-3">
