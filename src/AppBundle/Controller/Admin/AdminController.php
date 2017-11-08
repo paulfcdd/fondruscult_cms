@@ -79,9 +79,7 @@ class AdminController extends Controller
         if ($id) {
             $object = $this->getEntityRepository($entity)->findOneById($id);
         }
-        
-        dump($object);
-        
+                
         $form = $this->entityFormBuilder($className, $object);
         
         if ($object instanceof Page && $id) {
