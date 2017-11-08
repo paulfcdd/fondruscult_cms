@@ -19,8 +19,6 @@
   z-index: 2;
 }
 body {
-  background: url('../../img/dkj_main_building.png') no-repeat center center fixed;
-  -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
