@@ -68,8 +68,6 @@ class FrontController extends Controller
                 ->setLimit($page->getPostPerPage())
                 ->setOffset(0);
 
-            dump($paginator->getNumberOfPages());
-			
 			$orderBy = null;
 			
 			$limit = $page->getPostPerPage();
