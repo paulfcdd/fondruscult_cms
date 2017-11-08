@@ -19,8 +19,7 @@
     <h1>
         {% set headerString = 'admin.entity.title.trans_'~app.request.get('entity') %}
         {{ headerString | trans() }}
-
-        <small>List of objects</small>
+        <small>{{ 'admin.labels.list' | trans }}</small>
     </h1>
 {% endblock %}
 

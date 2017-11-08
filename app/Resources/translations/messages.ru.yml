@@ -1,4 +1,8 @@
 admin:
+    labels:
+        list: 'Список объектов'
+        manage: 'Управление объектом'
+
     sidebar:
         pages:
             title: 'Страницы'
@@ -14,6 +18,7 @@ admin:
 
     buttons:
         add: 'Новый объект'
+        save: 'Сохранить'
         edit: 'Правка'
         delete: 'Удалить'
         repair: 'Восстановить'
