@@ -83,6 +83,13 @@ class Page extends EntitySuperclass
      */
     private $sortOrder = 0;
     
+	/**
+     * @var boolean
+     * @ORM\Column(type="boolean")
+     */
+    private $inFooter = false;
+
+    
     /**
      * @return string
      */
@@ -259,6 +266,23 @@ class Page extends EntitySuperclass
         $this->sortOrder = $sortOrder;
         return $this;
     }
+    
+    /**
+     * @return bool
+     */
+    public function isInFooter()
+    {
+        return $this->inFooter;
+    }
 
-
+    /**
+     * @param bool $inFooter
+     * @return Page
+     */
+    public function setInFooter(bool $inFooter)
+    {
+        $this->inFooter = $inFooter;
+        
+        return $this;
+    }
 }

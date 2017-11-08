@@ -119,6 +119,18 @@ class FrontController extends Controller
 		'pages' => $pages,
 		]);
 	}
+	
+	public function footerAction() {
+		
+		$pages = $this->em()->getRepository(Page::class)->findBy([
+			'removed' => false,
+			'inFooter' => true,
+		]);
+		
+		return $this->render(':default/front/parts:footer.html.twig', [
+		'pages' => $pages,
+		]);
+	}
 
 	    /**
      * @param string $response

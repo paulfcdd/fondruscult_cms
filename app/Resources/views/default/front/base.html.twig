@@ -45,23 +45,7 @@
 							<p class="footer-label">фонд русской народной и православной культуры, традиций и ремесла</p>
 						</div>
 						<div class="col-lg-6 text-rigth footer-navbar">
-							<ul class="list-inline float-right">
-							  <li class="list-inline-item">
-								<a class="list-inline-item" href="about.html">О Фонде</a>
-							  </li>
-							  <li class="list-inline-item">
-								<a class="list-inline-item" href="news.html">Новости</a>
-							  </li>
-							  <li class="list-inline-item">
-								<a class="list-inline-item" href="news.html">Проекты</a>
-							  </li>
-							  <li class="list-inline-item">
-								<a class="list-inline-item" href="news.html">Доекменты</a>
-							  </li>
-							  <li class="list-inline-item">
-								<a class="list-inline-item" href="news.html">Контакты</a>
-							  </li>
-							</ul>
+							{{ render(controller('AppBundle:Front\\Front:footer')) }}
 						</div>
 						</div>
 					  </div>

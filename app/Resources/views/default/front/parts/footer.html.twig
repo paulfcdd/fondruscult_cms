@@ -1,0 +1,13 @@
+<ul class="list-inline float-right">
+	{% for page in pages %}
+	{% set path = null %}
+        {% if page.slug == '/' %}
+			{% set path = path('front.mainController') %}
+        {% else %}
+			{% set path = path('front.mainController', {'slug': page.slug}) %}
+		{% endif %}
+	<li class="list-inline-item">
+		<a class="list-inline-item" href="{{ path }}">{{ page.title }}</a>
+	</li>
+	{% endfor %}
+</ul>
