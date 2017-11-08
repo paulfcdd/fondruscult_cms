@@ -1,6 +1,7 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea/
 var/
+!var/.gitkeep
 vendor/
 web/node_modules/
 app/config/parameters.yml
@@ -9,3 +10,4 @@ app/bootstrap.php.cache
 web/bundles/
 /web/upload/**
 !web/upload/.gitkeep
+bin/composer.phar
