@@ -127,7 +127,10 @@ class Utilities
         return $this;
     }
 
-    public function getPages() {
+    /**
+     * @return int
+     */
+    public function getNumberOfPages() {
 
         $pages = 1;
 
@@ -143,7 +146,7 @@ class Utilities
 
             $pages = $countAllRecords / $countRecordsToShow;
 
-            $pages = round($pages);
+            $pages = ceil($pages);
 
             return $pages;
         }

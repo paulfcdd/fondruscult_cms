@@ -11,11 +11,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation as Http;
-use AppBundle\Service\FileUploaderService;
 
 class FrontController extends Controller
 {
 	protected $posts = null;
+
+	protected $parameters = [];
 	
 	public function em() {
 		return $this->getDoctrine()->getManager();
@@ -23,12 +24,11 @@ class FrontController extends Controller
 	
     /**
      * @param string | null $slug
+     * @param Utilities $utilities
      * @return Http\Response
-     * @Route("/{slug}",
-     *     name="front.mainController"
-     * )
+     * @Route("/{slug}", name="front.mainController")
      */
-    public function indexAction(string $slug = null) {
+    public function indexAction(string $slug = null, Utilities $utilities) {
 				
 		if (!$slug) {
 			$slug = '/';
@@ -36,6 +36,8 @@ class FrontController extends Controller
 
 		/** @var Page $page */
 		$page = $this->em()->getRepository(Page::class)->findOneBy(['removed' => false, 'slug' => $slug]);
+
+		$this->parameters['page'] = $page;
 
 		if ($page->getType() == 'page_with_post') {
 
@@ -47,7 +49,6 @@ class FrontController extends Controller
                 ->getRepository(Category::class)
                 ->findBy(['parent' => $page->getPostCategory()]);
 
-
 		    if (!empty($relatedCategories)) {
 		         /** @var Category $relatedCategory */
                 foreach ($relatedCategories as $relatedCategory) {
@@ -55,10 +56,19 @@ class FrontController extends Controller
                 }
             }
 
-			$criteria = [
+            $criteria = [
                 'removed' => false,
                 'category' => $categories,
-			];
+            ];
+
+            $paginator = $utilities
+                ->setObjectName(Post::class)
+                ->setCriteria($criteria)
+                ->setOrderBy(['dateCreated' => 'DESC'])
+                ->setLimit($page->getPostPerPage())
+                ->setOffset(0);
+
+            dump($paginator->getNumberOfPages());
 			
 			$orderBy = null;
 			
@@ -67,33 +77,21 @@ class FrontController extends Controller
 			$offset = null;
 			
 			$this->posts = $this->em()->getRepository(Post::class)->findBy($criteria, $orderBy, $limit, $offset);
+
+			$this->parameters['posts'] = $this->posts;
+			$this->parameters['paginator'] = $paginator->getNumberOfPages();
+			$this->parameters['offset'] = $paginator->getOffset();
+			$this->parameters['limit'] = $paginator->getLimit();
 		}
 		
-		return $this->render(':default/front/page:'.$page->getType().'.html.twig', [
-		'page' => $page,
-		'posts' => $this->posts,
-		]);
-    }
-
-    /**
-     * @Route("/{page_slug}?category={id}", name="filter_by_category")
-     * @Method({"GET"})
-     */
-    public function filterByCategoryAction($page_slug, $id) {
-
-        var_dump($id);
-        var_dump($page_slug);
-        die;
-
+		return $this->render(':default/front/page:'.$page->getType().'.html.twig', $this->parameters);
     }
 
     /**
      * @param string $page_slug
      * @param string $post_slug
      * @return Http\Response
-     * @Route("/{page_slug}/{post_slug}",
-     *     name="front.show_post"
-     * )
+     * @Route("/{page_slug}/{post_slug}", name="front.show_post")
      */
     public function showPostAction(string $page_slug, string $post_slug) {
 		

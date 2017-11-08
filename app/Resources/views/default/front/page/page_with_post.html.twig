@@ -19,6 +19,7 @@
  {% endblock %}
 
 {% block content %}
+
     {% for post in posts %}
 
         {% set content_preview = post.content | striptags %}
@@ -75,4 +76,35 @@
             </div>
         </div>
     {% endfor %}
+
+    {% if paginator > 1 %}
+
+        <div class="col-xs-12 text-center mx-auto">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    {% for i in 1..paginator %}
+
+                        {% set dataLimit = limit %}
+
+
+                        {% if i == 1 %}
+                            {% set dataOffset = offset %}
+                        {% else %}
+                            {% set dataOffset = posts | length * (i-1) %}
+                        {% endif %}
+
+                        <li class="page-item" id="li_page_{{ i }}">
+                            <a href="#" class="page-link"
+                               id="page_{{ i }}"
+                               data-offset="{{ dataOffset }}"
+                               data-limit="{{ dataLimit }}"
+                            >{{ i }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+
+    {% endif %}
+
 {% endblock %}
