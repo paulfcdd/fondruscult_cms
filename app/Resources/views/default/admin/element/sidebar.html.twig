@@ -41,16 +41,31 @@
 				path: path('admin.manage', {'entity': 'post'}),
 				tree: null,
 				data_entity: 'post'
-			},
-			{
-				label: 'admin.sidebar.posts.category' | trans,
-				icon: null,
-				path: path('admin.list', {'entity': 'category'}),
-				tree: null,
-				data_entity: 'category'
 			}
         ],
         data_entity: 'post'
+    },
+    {
+        label: 'admin.sidebar.posts.category' | trans,
+        icon: null,
+        path: null,
+        tree: [
+        {
+            label: 'admin.sidebar.posts.list' | trans,
+            icon: null,
+            path:path('admin.list', {'entity': 'category'}),
+            tree: null,
+            data_entity: 'post'
+        },
+        {
+            label: 'admin.sidebar.posts.add' | trans,
+            icon: null,
+            path: path('admin.manage', {'entity': 'category'}),
+            tree: null,
+            data_entity: 'post'
+        }
+        ],
+        data_entity: 'category'
     }
     ] %}
 

@@ -17,13 +17,13 @@
                            data-entity="{{ app.request.get('entity') }}"
                            data-title="{{ object.title }}"
                            data-id="{{ object.id }}">
-                       {{ 'admin.buttons.repair' | trans }}
+                       <i class="fa fa-undo" aria-hidden="true"></i>
                    </button>
                     <button type="button" class="btn btn-danger delete-object"
                             data-entity="{{ app.request.get('entity') }}"
                             data-title="{{ object.title }}"
                             data-id="{{ object.id }}">
-                        {{ 'admin.buttons.delete' | trans }}
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
                     </button>
                 </div>
             </td>

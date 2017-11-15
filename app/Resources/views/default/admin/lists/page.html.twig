@@ -24,13 +24,13 @@
 									'id': object.id
 									}) }}" 
 					 type="button" class="btn btn-primary">
-                      {{ 'admin.buttons.edit' | trans }}
+                      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                   </a>
 				  <button type="button" class="btn btn-danger delete-object"
                           data-entity="{{ app.request.get('entity') }}"
                           data-title="{{ object.title }}"
                           data-id="{{ object.id }}">
-                      {{ 'admin.buttons.delete' | trans }}
+                      <i class="fa fa-trash-o" aria-hidden="true"></i>
                   </button>
 				</div>
             </td>
