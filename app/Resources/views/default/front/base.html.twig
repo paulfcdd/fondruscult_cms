@@ -1,62 +1,62 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<title>{%block title %}{% endblock %}</title>
-	<meta name="description" content="{% block seoDescription %}{% endblock %}">
+    <title>{%block title %}{% endblock %}</title>
+    <meta name="description" content="{% block seoDescription %}{% endblock %}">
     <meta name="keywords" content="{% block seoKeywords %}{% endblock %}">
-	
-	<link href="{{ asset('front/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
-	<link href="{{ asset('node_modules/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-	<link href="{{ asset('front/css/style.css') }}" rel="stylesheet" type="text/css">
-	<meta charset="utf-8" />
+
+    <link href="{{ asset('front/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('node_modules/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('front/css/style.css') }}" rel="stylesheet" type="text/css">
+    <meta charset="utf-8"/>
 
     {% block stylesheet %}{% endblock %}
-</head>
 
+</head>
 <body>
 
-	<div class="wrapper">
-		<div class="container">
-			    {{ render(controller('AppBundle:Front\\Front:navbar')) }}
-		</div>
-		<div class="content">
-			<div class="container">
-				{% block row %}
-				<div class="row content-row-block" id="{% block page_id%}{% endblock %}">
+<div class="wrapper">
+    <!--NAVBAR-->
+    <div class="container navbar-wrapper">
+        {{ render(controller('AppBundle:Front\\Front:navbar')) }}
+    </div>
+    <!--CONTENT-->
+    <div class="content">
+        <div class="container">
+            {% block content %}
+                {% block breadcrumbs %}{% endblock %}
 
-					{% block breadcrumbs %}{% endblock %}
+                {% block page_title %}{% endblock %}
 
-					<h1 style="width: 100%">{% block page_title %}{% endblock %}</h1>
-					{% block content %}{% endblock %}
-				</div>
-				{% endblock %}
-			</div>
-		</div><!-- .content -->
-
-		<div class="footer">
-			<div class="container">
-				<div class="row">
-					<div class="card">
-					  <div class="card-block">
-						<div class="row">
-						<div class="col-lg-6">
-							<p class="footer-label">фонд русской народной и православной культуры, традиций и ремесла</p>
-						</div>
-						<div class="col-lg-6 text-rigth footer-navbar">
-							{{ render(controller('AppBundle:Front\\Front:footer')) }}
-						</div>
-						</div>
-					  </div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	</div><!-- .wrapper -->
+            {% endblock %}
+        </div>
+    </div>
+    {% block footer %}
+        <div class="footer">
+            <div class="container">
+                <div class="footer-bar">
+                    <div class="container-fluid py-4">
+                        <div class="row">
+                            <div class="col-lg-6 hidden-sm-down">
+                                <p class="float-left left-label">
+                                    фонд русской народной и православной культуры, традиций и ремесла
+                                </p>
+                            </div>
+                            <div class="col-lg-6">
+                                {{ render(controller('AppBundle:Front\\Front:footer')) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+</div>
+{% block scripts %}{% endblock %}
 <script src="{{ asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
-<script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
-{% block javascript %}{% endblock %}
+<script src="{{ asset('node_modules/tether/dist/js/tether.min.js') }}"></script>
+<script src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 </body>
 </html>

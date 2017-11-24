@@ -1,15 +1,58 @@
+@desktop:   ~"only screen and (min-width: 960px) and (max-width: 1199px)";
+@tablet:    ~"only screen and (min-width: 720px) and (max-width: 959px)";
+@mobile:    ~"only screen and (max-width: 720px)";
+
 .main-navbar {
 	background-color: #cfba91;
 	width: 100%;
 	margin-top: 80px;
-	
-	.left-navabar, .right-navbar {
-		ul {
-		display: inline-flex;
-		width: 100%;
-		
-			li {
-				margin: 0 5%;
+	padding-top: 0;
+	padding-bottom: 0;
+
+	@media @mobile {
+		background-color: transparent;
+		margin-top: 0;
+	}
+
+	.menu-wrapper {
+
+		@media @mobile {
+			margin-bottom: 10%;
+		}
+
+		#menu-wrapper-row {
+			@media @mobile {
+				margin-top: 15%;
+			}
+		}
+
+		.logo-navbar {
+			img {
+				position: absolute;
+				left: -8%;
+				top: -88px;
+				z-index: 5;
+
+				@media @mobile {
+					display: none;
+				}
+			}
+		}
+		.left-navabar, .right-navbar {
+			ul {
+				display: inline-flex;
+				width: 100%;
+				font-family: 'cyrylic old';
+
+
+				li {
+					margin: 0 5%;
+
+					a {
+						font-family: CyrillicOld;
+						font-size: 20px;
+					}
+				}
 			}
 		}
 	}

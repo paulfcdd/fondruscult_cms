@@ -1,39 +1,50 @@
+@desktop: ~"only screen and (min-width: 960px) and (max-width: 1199px)";
+@tablet: ~"only screen and (min-width: 720px) and (max-width: 959px)";
+@mobile: ~"only screen and (max-width: 720px)";
+
 .card {
 
 	width: 100%;
 	background-color: #cfba91;
-	
+
 	.card-block {
 		padding-bottom: 0;
-		
+
 		.footer-navbar {
 			ul {
 				li {
-				
 					&:after {
 						content: '|';
 					}
-					
 					&:last-child {
 						&:after {
 							content: '';
 						}
 					}
-					
-					
-					
 					a {
 						color: #BE1C1A;
 					}
 				}
 			}
 		}
-		
+
 		.footer-label {
 			color: #BE1C1A;
 			text-transform: uppercase;
 			font-size: 15px;
 			white-space: nowrap;
+
+			@media @mobile {
+				white-space: pre-line;
+			}
+
+			@media @tablet {
+				white-space: pre-line;
+			}
+
+			@media @desktop {
+				white-space: pre-line;
+			}
 		}
 	}
 

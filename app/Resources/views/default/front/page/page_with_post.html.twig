@@ -1,4 +1,4 @@
-{% extends 'default/front/base.html.twig' %}
+{% extends ':default/front:base.html.twig' %}
 
 {% set content_preview_chars_limit = 500 %}
 
@@ -7,103 +7,99 @@
 {% block meta_autor %}{% endblock %}
 {% block title %}{{ page.title }}{% endblock %}
 
-{% block page_title %}{{ page.title }}{% endblock %}
-
-{% block breadcrumb_page_name %}{{ page.title }}{% endblock %}
-
- {% block breadcrumbs %}
-     <ol class="breadcrumb">
-         <li class="breadcrumb-item"><a href="{{ path('front.mainController') }}">Главная</a></li>
-         <li class="breadcrumb-item active">{{ page.title }}</li>
-     </ol>
- {% endblock %}
-
 {% block content %}
 
-    {% for post in posts %}
+    <div class="row content-row-block" id="news">
+        {% block breadcrumbs %}
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('front.mainController') }}">Главная</a></li>
+                <li class="breadcrumb-item active">{{ page.title }}</li>
+            </ol>
+        {% endblock %}
 
-        {% set content_preview = post.content | striptags %}
+        {% block page_title %}
+            <h1 class="content-title">{{ page.title }}</h1>
+        {% endblock %}
 
-        {% if content_preview | length >= content_preview_chars_limit %}
-            {% set content_preview = content_preview | slice(0,content_preview_chars_limit) %}
-            {% set content_preview = content_preview~'...' %}
-        {% endif %}
+        {% for post in posts %}
 
-        <div class="card">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="card-block">
+            {% set content_preview = post.content | striptags %}
 
-                        <a class="post-title-link" href="{{ path('front.show_post', {
-                            'page_slug': app.request.get('slug'),
-                            'post_slug': post.slug
-                        }) }}">
-                            <h4 class="card-title post-title mb-0">
+            {% if content_preview | length >= content_preview_chars_limit %}
+                {% set content_preview = content_preview | slice(0,content_preview_chars_limit) %}
+                {% set content_preview = content_preview~'...' %}
+            {% endif %}
+
+            <div class="card" style="width: 100%;">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card-block">
+                            <h4 class="card-title">
                                 {{ post.title }}
                             </h4>
-                        </a>
 
-                        <small>
-                            Категория: {{ post.category.name }}
-                        </small>
+                            <p class="card-text">
+                              {{ content_preview }}
+                            </p>
 
-                        <p class="card-text pt-3">
-                            {{ content_preview }}
-                        </p>
 
-                        <a href="{{ path('front.show_post', {
-                            'page_slug': app.request.get('slug'),
-                            'post_slug': post.slug
-                        }) }}" class="float-right">Подробнее</a>
+                            <a href="{{ path('front.show_post', {
+                                'page_slug': app.request.get('slug'),
+                                'post_slug': post.slug
+                            }) }}" class="btn btn-secondary read-more-btn float-right not-on-main">
+                                Подробнее <span class="fa fa-chevron-right"></span>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card-img-bottom">
+                    <div class="col-md-4">
+                        <div class="card-img-bottom">
 
-                        {% set post_img = 'http://placehold.it/250x250' %}
+                            {% set post_img = asset('front/img/logo.png') %}
 
-                        {% if post.files is not empty %}
-                            {% for file in post.files %}
-                                {% if file.isDefault == true %}
-                                    {% set path_to_file = 'upload/post/'~file.name %}
-                                    {% set post_img = asset(''~path_to_file~'') %}
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
-                        <img src="{{ post_img }}" width="250px" height="250px">
+                            {% if post.files is not empty %}
+                                {% for file in post.files %}
+                                    {% if file.isDefault == true %}
+                                        {% set path_to_file = 'upload/post/'~file.name %}
+                                        {% set post_img = asset(''~path_to_file~'') %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+
+                            <img src="{{ post_img }}" width="250px" height="250px">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
 
-    {% if paginator > 1 %}
+        {% if paginator > 1 %}
 
-        <div class="col-xs-12 text-center mx-auto">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    {% for i in 1..paginator %}
+            <div class="col-xs-12 text-center mx-auto">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        {% for i in 1..paginator %}
 
-                        {% set dataLimit = limit %}
+                            {% set dataLimit = limit %}
 
-                        {% if i == 1 %}
-                            {% set dataOffset = offset %}
-                        {% else %}
-                            {% set dataOffset = posts | length * (i-1) %}
-                        {% endif %}
+                            {% if i == 1 %}
+                                {% set dataOffset = offset %}
+                            {% else %}
+                                {% set dataOffset = posts | length * (i-1) %}
+                            {% endif %}
 
-                        <li class="page-item" id="li_page_{{ i }}">
-                            <a href="#" class="page-link"
-                               id="page_{{ i }}"
-                               data-offset="{{ dataOffset }}"
-                               data-limit="{{ dataLimit }}"
-                            >{{ i }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </nav>
-        </div>
+                            <li class="page-item" id="li_page_{{ i }}">
+                                <a href="#" class="page-link"
+                                   id="page_{{ i }}"
+                                   data-offset="{{ dataOffset }}"
+                                   data-limit="{{ dataLimit }}"
+                                >{{ i }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
 
-    {% endif %}
+        {% endif %}
 
+    </div>
 {% endblock %}

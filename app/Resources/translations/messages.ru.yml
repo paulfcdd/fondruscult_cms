@@ -13,8 +13,8 @@ admin:
             list: 'Список записей'
             add: 'Добавить запись'
             category: 'Категории'
-        trash:
-            title: 'Корзина'
+        settings:
+            title: 'Настройки'
 
     buttons:
         add: 'Новый объект'

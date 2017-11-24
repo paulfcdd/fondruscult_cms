@@ -1,0 +1,13 @@
+#projects .card {
+  border: none;
+  margin-bottom: 20px;
+}
+#projects .card .card-block {
+  padding-left: 0;
+}
+#projects .card .card-img-bottom {
+  color: #fff;
+  height: 20rem;
+  background: url(http://placehold.it/250x250) center no-repeat;
+  background-size: cover;
+}

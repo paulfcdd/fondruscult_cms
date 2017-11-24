@@ -1,20 +1,22 @@
-{% extends 'default/front/base.html.twig' %}
+{% extends ':default/front:base.html.twig' %}
 
-{% block meta_description %}{{ page.seoDescription }}{% endblock %}
+{% block content %}
+    <div class="row content-row-block" id="news">
+        {% block breadcrumbs %}
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('front.mainController') }}">Главная</a></li>
+                <li class="breadcrumb-item"><a
+                            href="{{ path('front.mainController', {'slug': page.slug}) }}">{{ page.title }}</a></li>
+            </ol>
+        {% endblock %}
 
-{% block meta_keywords %}{{ page.seoKeywords }}{% endblock %}
+        {% block page_title %}
+            <h1 class="content-title">{{ page.title }}</h1>
+        {% endblock %}
 
-{% block meta_autor %}{% endblock %}
+        <div class="px-3">
+            {{ page.content | raw }}
+        </div>
 
-{% block title %}{{ page.title }}{% endblock %}
-
-{% block page_title %}{{ page.title }}{% endblock %}
-
-{% block breadcrumbs %}
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ path('front.mainController') }}">Главная</a></li>
-        <li class="breadcrumb-item active">{{ page.title }}</li>
-    </ol>
+    </div>
 {% endblock %}
-
-{% block content %}{{ page.content | raw }}{% endblock %}

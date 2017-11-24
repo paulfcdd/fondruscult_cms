@@ -114,7 +114,7 @@ class Category {
 	}
 	
 	public function getPosts() {
-		return $this-posts;
+		return $this->posts;
 	}
 	
     /**

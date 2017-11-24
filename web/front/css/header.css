@@ -1,0 +1,49 @@
+.main-navbar {
+  background-color: #cfba91;
+  width: 100%;
+  margin-top: 80px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+@media only screen and (max-width: 720px) {
+  .main-navbar {
+    background-color: transparent;
+    margin-top: 0;
+  }
+}
+@media only screen and (max-width: 720px) {
+  .main-navbar .menu-wrapper {
+    margin-bottom: 10%;
+  }
+}
+@media only screen and (max-width: 720px) {
+  .main-navbar .menu-wrapper #menu-wrapper-row {
+    margin-top: 15%;
+  }
+}
+.main-navbar .menu-wrapper .logo-navbar img {
+  position: absolute;
+  left: -8%;
+  top: -88px;
+  z-index: 5;
+}
+@media only screen and (max-width: 720px) {
+  .main-navbar .menu-wrapper .logo-navbar img {
+    display: none;
+  }
+}
+.main-navbar .menu-wrapper .left-navabar ul,
+.main-navbar .menu-wrapper .right-navbar ul {
+  display: inline-flex;
+  width: 100%;
+  font-family: 'cyrylic old';
+}
+.main-navbar .menu-wrapper .left-navabar ul li,
+.main-navbar .menu-wrapper .right-navbar ul li {
+  margin: 0 5%;
+}
+.main-navbar .menu-wrapper .left-navabar ul li a,
+.main-navbar .menu-wrapper .right-navbar ul li a {
+  font-family: CyrillicOld;
+  font-size: 20px;
+}

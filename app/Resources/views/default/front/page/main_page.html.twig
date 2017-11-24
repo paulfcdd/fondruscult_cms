@@ -1,186 +1,139 @@
-{% extends 'default/front/base.html.twig' %}
+{% extends ':default/front:base.html.twig' %}
 
 
-{% block meta_description %}{{ page.seoDescription }}{% endblock %}
-{% block meta_keywords %}{{ page.seoKeywords }}{% endblock %}
-{% block meta_autor %}{% endblock %}
-{% block title %}{{ page.title }}{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12 col-md-12 p-0 carousel-wrapper">
+            <div id="demo" class="carousel slide" data-ride="carousel">
 
-{% block page_title %}{{ page.title }}{% endblock %}
+                <!-- The slideshow -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="img/thanks.jpg" alt="">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/simakov.jpg" alt="">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/chlebnyj_spas.jpg" alt="">
+                    </div>
+                </div>
 
-{% block breadcrumb_page_name %}{{ page.title }}{% endblock %}
+                <!-- Left and right controls -->
+                <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="carousel-control-next" href="#demo" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </a>
+            </div>
+            <div class="indicators">
+                <!-- Indicators -->
+                <ul class="carousel-indicators">
+                    <li data-target="#demo" data-slide-to="0"></li>
+                    <li data-target="#demo" data-slide-to="1"></li>
+                    <li data-target="#demo" data-slide-to="2"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
-{% block breadcrumbs %} {% endblock %}
+    <div class="row mt-4 mb-4 content-info-wrapper">
+        <div class="col-xs-12 col-md-4">
+            <h5 class="pb-2 label-text">О Фонде</h5>
+            <div class="text-block">
+                <img src="https://www.w3schools.com/bootstrap4/ny.jpg">
+                <p>
+                    Фонд Русской Народной и Православной Культуры, Традиций и Ремесел (далее – Фонд Русской
+                    Культуры) был создан в 2013 году.
+                    Основными направлениями деятельности Фонда являются:
+                <ul class="pl-3">
+                    <li>актуализация тем быта русского народа и русских национальных традиций...</li>
+                </ul>
+                </p>
+            </div>
+            <div>
+                <a href="{{ path('front.mainController', {'slug': 'o-fonde'}) }}" class="btn btn-secondary read-more-btn">
+                    Подробнее <span class="fa fa-chevron-right"></span>
+                </a>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-4">
+            <h5 class="pb-2 label-text">Новости</h5>
+            <div class="text-block">
+                <img src="https://www.w3schools.com/bootstrap4/ny.jpg">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Morbi vitae quam in tortor tempus auctor.
+                    Phasellus fermentum sem vitae risus condimentum dapibus.
+                    Nulla justo est, pretium in auctor vitae, placerat nec turpis.
+                    Fusce id nisi elit. Suspendisse at dignissim nibh.
+                    Vivamus rhoncus arcu eu pulvinar fringilla.
+                </p>
+            </div>
+            <div>
+                <a href="#" class="btn btn-secondary read-more-btn">
+                    Подробнее <span class="fa fa-chevron-right"></span>
+                </a>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-4">
+            <h5 class="pb-2 label-text">Контакты</h5>
+            <div class="text-block">
+                <ul class="contact-list">
+                    <li class="list-item">
+                        <h6><span class="fa fa-phone"></span> 4955555</h6>
+                    </li>
+                    <li class="list-item">
+                        <h6><span class="fa fa-envelope"></span> email@mail.ru</h6>
+                    </li>
+                    <li class="list-item">
+                        <h6><span class="fa fa-skype"></span> my_skype_acc</h6>
+                    </li>
+                    <li class="list-item">
+                        <h6><span class="fa fa-chevron-right"></span> Обратная связь</h6>
+                    </li>
+                    <li class="list-item sublist">
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <span class="fa fa-facebook fa-2x"></span>
+                            </li>
+                            <li class="list-inline-item">
+                                <span class="fa fa-twitter fa-2x"></span>
+                            </li>
+                            <li class="list-inline-item">
+                                <span class="fa fa-flickr fa-2x"></span>
+                            </li>
+                            <li class="list-inline-item">
+                                <span class="fa fa-vk fa-2x"></span>
+                            </li>
+                            <li class="list-inline-item">
+                                <span class="fa fa-youtube fa-2x"></span>
+                            </li>
+                            <li class="list-inline-item">
+                                <span class="fa fa-rss fa-2x"></span>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bar">
+            <div class="container-fluid py-4">
+                <div class="row">
+                    <div class="col-lg-6 hidden-sm-down">
+                        <p class="float-left left-label">
+                            фонд русской народной и православной культуры, традиций и ремесла
+                        </p>
+                    </div>
+                    <div class="col-lg-6">
+                        {{ render(controller('AppBundle:Front\\Front:footer')) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-{% block stylesheet %}
-	<style>
-		
-		.carousel-wrapper {
-			border: 10px solid #be1c1b; 
-			border-radius: 15px;
-		}
-		
-		.content-info-wrapper {
-			border: 10px solid #be1c1b; 
-			border-radius: 15px;
-			background-color: #be1c1b;
-			color: white;
-			min-height: 250px;
-			padding-top: 30px;
-			padding-bottom: 100px;
-		}
-		
-		.content-info-wrapper .text-block {
-			border-top: 2px solid white;
-			padding-top: 10px;
-		}
-				
-		.content-info-wrapper img {
-			width: 100%;
-		}
-		
-		.carousel {
-			width: 100%;
-		}
-		
-		.indicators {
-			min-height: 30px;
-			background-color: #be1c1b;
-		}
-		
-		.carousel-indicators {
-			position: relative;
-			margin-bottom: 0px;
-			padding: 20px 0 0 0;
-		}
-		
-		.carousel-indicators > li {
-			border-radius: 50%;
-			height: 20px;
-			max-width: 20px;
-		}
-		
-		.contact-list {
-			list-style-type: none;
-		}
-		
-		.contact-list li {
-			padding: 20px 0;
-		}
-		
-		.sublist {
-			border-top: 2px solid white;
-			padding-top: 0px !important;
-		}
-	</style>
 {% endblock %}
 
-{% block row %}
-	<div class="row">
-		<div class="col-xs-12 col-md-12 p-0 carousel-wrapper">
-			<div id="demo" class="carousel slide" data-ride="carousel">
-
-			  <!-- The slideshow -->
-			  <div class="carousel-inner">
-				<div class="carousel-item active">
-				  <img src="https://www.w3schools.com/bootstrap4/la.jpg" alt="Los Angeles" width="100%" height="500">
-				</div>
-				<div class="carousel-item">
-				  <img src="https://www.w3schools.com/bootstrap4/chicago.jpg" alt="Chicago" width="100%" height="500">
-				</div>
-				<div class="carousel-item">
-				  <img src="https://www.w3schools.com/bootstrap4/ny.jpg" alt="New York" width="100%" height="500">
-				</div>
-			  </div>
-			  
-			  <!-- Left and right controls -->
-			  <a class="carousel-control-prev" href="#demo" data-slide="prev">
-				<span class="carousel-control-prev-icon"></span>
-			  </a>
-			  <a class="carousel-control-next" href="#demo" data-slide="next">
-				<span class="carousel-control-next-icon"></span>
-			  </a>
-			</div>
-			<div class="indicators">
-				 <!-- Indicators -->
-			  <ul class="carousel-indicators">
-				<li data-target="#demo" data-slide-to="0"></li>
-				<li data-target="#demo" data-slide-to="1"></li>
-				<li data-target="#demo" data-slide-to="2"></li>
-			  </ul>
-			</div>
-		</div>
-	</div>
-	
-	<div class="row mt-4 mb-4 content-info-wrapper">
-		<div class="col-xs-12 col-md-4">
-			<h5 class="pb-2">О Фонде</h5>
-			<div class="text-block">
-				<img src="https://www.w3schools.com/bootstrap4/ny.jpg" >
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-					Morbi vitae quam in tortor tempus auctor. 
-					Phasellus fermentum sem vitae risus condimentum dapibus. 
-					Nulla justo est, pretium in auctor vitae, placerat nec turpis. 
-					Fusce id nisi elit. Suspendisse at dignissim nibh. 
-					Vivamus rhoncus arcu eu pulvinar fringilla. 
-				</p>
-			</div>
-		</div>
-		<div class="col-xs-12 col-md-4">
-			<h5 class="pb-2">Новости</h5>
-			<div class="text-block">
-				<img src="https://www.w3schools.com/bootstrap4/ny.jpg" >
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-					Morbi vitae quam in tortor tempus auctor. 
-					Phasellus fermentum sem vitae risus condimentum dapibus. 
-					Nulla justo est, pretium in auctor vitae, placerat nec turpis. 
-					Fusce id nisi elit. Suspendisse at dignissim nibh. 
-					Vivamus rhoncus arcu eu pulvinar fringilla. 
-				</p>
-			</div>
-		</div>
-		<div class="col-xs-12 col-md-4">
-			<h5 class="pb-2">Контакты</h5>
-			<div class="text-block">
-				<ul class="contact-list">
-					<li class="list-item">
-						<h6><span class="fa fa-phone"></span> 4955555</h6>
-					</li>
-					<li class="list-item">
-						<h6><span class="fa fa-envelope"></span> email@mail.ru</h6>
-					</li>
-					<li class="list-item">
-						<h6><span class="fa fa-skype"></span> my_skype_acc</h6>
-					</li>
-					<li class="list-item">
-						<h6><span class="fa fa-chevron-right"></span> Обратная связь</h6>
-					</li>
-					<li class="list-item sublist">
-						<ul class="list-inline">
-						  <li class="list-inline-item">
-							<span class="fa fa-facebook fa-2x"></span>
-						  </li>
-						  <li class="list-inline-item">
-							<span class="fa fa-twitter fa-2x"></span>
-						  </li>
-						  <li class="list-inline-item">
-							<span class="fa fa-flickr fa-2x"></span>
-						  </li>
-						  <li class="list-inline-item">
-							<span class="fa fa-vk fa-2x"></span>
-						  </li>
-						  <li class="list-inline-item">
-							<span class="fa fa-youtube fa-2x"></span>
-						  </li>
-						  <li class="list-inline-item">
-							<span class="fa fa-rss fa-2x"></span>
-						  </li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-{% endblock %}
+{% block footer %}{% endblock %}

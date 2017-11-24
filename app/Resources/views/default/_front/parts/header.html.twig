@@ -1,40 +1,42 @@
 <div class="row">
     <nav class="navbar navbar-light bg-faded navbar-toggleable-md navbar-toggleable-lg main-navbar">
+
         <button class="navbar-toggler navbar-toggler-right"
                 type="button" data-toggle="collapse"
-                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <div class="container menu-wrapper">
-                <div class="row" id="menu-wrapper-row">
+            <div class="container">
+                <div class="row">
                     <div class="col-lg-5 text-center left-navabar">
                         <ul class="navbar-nav mr-auto text-center navbar-text">
                             {% for i in 0..3 %}
                                 {% for page in pages %}
-                                    {% if page.sortOrder == i %}
-                                        {% set path = null %}
-                                        {% if page.slug == '/' %}
-                                            {% set path = path('front.mainController') %}
-                                        {% else %}
-                                            {% set path = path('front.mainController', {'slug': page.slug}) %}
-                                        {% endif %}
+                                   {% if page.sortOrder == i %}
+                                       {% set path = null %}
+                                       {% if page.slug == '/' %}
+                                           {% set path = path('front.mainController') %}
+                                       {% else %}
+                                           {% set path = path('front.mainController', {'slug': page.slug}) %}
+                                       {% endif %}
 
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ path }}">{{ page.title }}</a>
-                                        </li>
-                                    {% endif %}
+                                       <li class="nav-item">
+                                           <a class="nav-link" href="{{ path }}">{{ page.title }}</a>
+                                       </li>
+                                   {% endif %}
                                 {% endfor %}
                             {% endfor %}
                         </ul>
                     </div>
                     <div class="col-lg-2">
                         <a href="{{ path('front.mainController') }}">
-                            <img src="{{ asset('front/img/logo.png') }}" style="  position: absolute;
+                            <img src="{{ asset('front/img/images.jpeg') }}" style="  position: absolute;
 																	left: -8%;
-																	top: -75px;
+																	top: -88px;
 																	z-index: 5;">
                         </a>
                     </div>

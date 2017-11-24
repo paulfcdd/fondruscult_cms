@@ -142,7 +142,7 @@ class Utilities
 
         $countRecordsToShow = count($recordsToShow);
 
-        if ($countAllRecords > $countRecordsToShow) {
+        if ($countAllRecords > $countRecordsToShow && $countRecordsToShow != 0) {
 
             $pages = $countAllRecords / $countRecordsToShow;
 

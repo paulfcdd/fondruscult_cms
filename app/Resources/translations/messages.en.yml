@@ -9,8 +9,8 @@ admin:
             list: 'All posts'
             add: 'Add post'
             category: 'Categories'
-        trash:
-            title: 'Trash'
+        settings:
+            title: 'Settings'
 
     buttons:
         add: 'Add new object'

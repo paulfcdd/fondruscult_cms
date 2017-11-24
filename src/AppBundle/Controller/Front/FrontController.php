@@ -14,45 +14,47 @@ use Symfony\Component\HttpFoundation as Http;
 
 class FrontController extends Controller
 {
-	protected $posts = null;
+    protected $posts = null;
 
-	protected $parameters = [];
-	
-	public function em() {
-		return $this->getDoctrine()->getManager();
-	}
-	
+    protected $parameters = [];
+
+    public function em()
+    {
+        return $this->getDoctrine()->getManager();
+    }
+
     /**
      * @param string | null $slug
      * @param Utilities $utilities
      * @return Http\Response
      * @Route("/{slug}", name="front.mainController")
      */
-    public function indexAction(string $slug = null, Utilities $utilities) {
-				
-		if (!$slug) {
-			$slug = '/';
-		}
+    public function indexAction(string $slug = null, Utilities $utilities)
+    {
 
-		/** @var Page $page */
-		$page = $this->em()->getRepository(Page::class)->findOneBy(['removed' => false, 'slug' => $slug]);
+        if (!$slug) {
+            $slug = '/';
+        }
 
-		$this->parameters['page'] = $page;
+        /** @var Page $page */
+        $page = $this->em()->getRepository(Page::class)->findOneBy(['removed' => false, 'slug' => $slug]);
 
-		if ($page->getType() == 'page_with_post') {
+        $this->parameters['page'] = $page;
 
-		    $categories = [];
+        if ($page->getType() == 'page_with_post') {
 
-		    $categories[] = $page->getPostCategory();
+            $categories = [];
 
-		    $relatedCategories = $this->em()
+            $categories[] = $page->getPostCategory();
+
+            $relatedCategories = $this->em()
                 ->getRepository(Category::class)
                 ->findBy(['parent' => $page->getPostCategory()]);
 
-		    if (!empty($relatedCategories)) {
-		         /** @var Category $relatedCategory */
+            if (!empty($relatedCategories)) {
+                /** @var Category $relatedCategory */
                 foreach ($relatedCategories as $relatedCategory) {
-		            $categories[] = $relatedCategory->getId();
+                    $categories[] = $relatedCategory->getId();
                 }
             }
 
@@ -68,21 +70,21 @@ class FrontController extends Controller
                 ->setLimit($page->getPostPerPage())
                 ->setOffset(0);
 
-			$orderBy = null;
-			
-			$limit = $page->getPostPerPage();
-			
-			$offset = null;
-			
-			$this->posts = $this->em()->getRepository(Post::class)->findBy($criteria, $orderBy, $limit, $offset);
+            $orderBy = null;
 
-			$this->parameters['posts'] = $this->posts;
-			$this->parameters['paginator'] = $paginator->getNumberOfPages();
-			$this->parameters['offset'] = $paginator->getOffset();
-			$this->parameters['limit'] = $paginator->getLimit();
-		}
-		
-		return $this->render(':default/front/page:'.$page->getType().'.html.twig', $this->parameters);
+            $limit = $page->getPostPerPage();
+
+            $offset = null;
+
+            $this->posts = $this->em()->getRepository(Post::class)->findBy($criteria, $orderBy, $limit, $offset);
+
+            $this->parameters['posts'] = $this->posts;
+            $this->parameters['paginator'] = $paginator->getNumberOfPages();
+            $this->parameters['offset'] = $paginator->getOffset();
+            $this->parameters['limit'] = $paginator->getLimit();
+        }
+
+        return $this->render(':default/front/page:' . $page->getType() . '.html.twig', $this->parameters);
     }
 
     /**
@@ -91,48 +93,52 @@ class FrontController extends Controller
      * @return Http\Response
      * @Route("/{page_slug}/{post_slug}", name="front.show_post")
      */
-    public function showPostAction(string $page_slug, string $post_slug) {
-		
-		
-		$post = $this->em()->getRepository(Post::class)->findOneBySlug($post_slug);
-		$page = $this->em()->getRepository(Page::class)->findOneBySlug($page_slug);
-		
-		return $this->render(':default/front/page:single_post_page.html.twig', [
-		    'post' => $post,
+    public function showPostAction(string $page_slug, string $post_slug)
+    {
+
+
+        $post = $this->em()->getRepository(Post::class)->findOneBySlug($post_slug);
+        $page = $this->em()->getRepository(Page::class)->findOneBySlug($page_slug);
+
+        return $this->render(':default/front/page:single_post_page.html.twig', [
+            'post' => $post,
             'page' => $page,
-		]);
-		
-	}
+        ]);
 
-    public function navbarAction() {
-		
-		$pages = $this->em()->getRepository(Page::class)->findBy([
-			'removed' => false,
-			'inNavbar' => true,
-		]);
-		
-		return $this->render(':default/front/parts:header.html.twig', [
-		'pages' => $pages,
-		]);
-	}
-	
-	public function footerAction() {
-		
-		$pages = $this->em()->getRepository(Page::class)->findBy([
-			'removed' => false,
-			'inFooter' => true,
-		]);
-		
-		return $this->render(':default/front/parts:footer.html.twig', [
-		'pages' => $pages,
-		]);
-	}
+    }
 
-	    /**
+    public function navbarAction()
+    {
+
+        $pages = $this->em()->getRepository(Page::class)->findBy([
+            'removed' => false,
+            'inNavbar' => true,
+        ]);
+
+        return $this->render(':default/front/parts:header.html.twig', [
+            'pages' => $pages,
+        ]);
+    }
+
+    public function footerAction()
+    {
+
+        $pages = $this->em()->getRepository(Page::class)->findBy([
+            'removed' => false,
+            'inFooter' => true,
+        ]);
+
+        return $this->render(':default/front/parts:footer.html.twig', [
+            'pages' => $pages,
+        ]);
+    }
+
+    /**
      * @param string $response
      * @return mixed|string
      */
-    private function googleRecaptchaVerifyer(string $response) {
+    private function googleRecaptchaVerifyer(string $response)
+    {
 
         $curl = curl_init();
 
@@ -145,7 +151,7 @@ class FrontController extends Controller
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS =>
-                "-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"secret\"\r\n\r\n".$this->getParameter('recaptcha_secret_key')."\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"response\"\r\n\r\n".$response."\r\n-----011000010111000001101001--\r\n",
+                "-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"secret\"\r\n\r\n" . $this->getParameter('recaptcha_secret_key') . "\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"response\"\r\n\r\n" . $response . "\r\n-----011000010111000001101001--\r\n",
             CURLOPT_HTTPHEADER => array(
                 "content-type: multipart/form-data; boundary=---011000010111000001101001"
             ),
